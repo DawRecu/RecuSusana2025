@@ -2,6 +2,9 @@
 
 Repositorio para la recuperación de Susana
 
-**Realizar el despliegue continuo de una instancia que despliegue un contenedor de Jenkins**
+## Integramos Herramientas
+**Utilizar GithubActions para, a través de terraform tener una instancia con un contenedor que despliegue Jenkins.**
 
-**Realizar una página web sobre algo social**
+
+## Ay qué penita más grande!!!!!
+**Vamos a generar de forma automática la documentación de un proyecto de interés social, hecho en Django.**
