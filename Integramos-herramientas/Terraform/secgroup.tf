@@ -1,6 +1,6 @@
 #? Creación del grupo de seguridad
 resource "aws_security_group" "ubuntu-jenkins" {
-  name        = "cad-hotel-sg"
+  name        = "ub-jenkins-sg"
   description = "Permitir SSH y HTTP"
   vpc_id      = aws_vpc.mi_vpc.id
 
