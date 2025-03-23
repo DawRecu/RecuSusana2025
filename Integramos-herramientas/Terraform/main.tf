@@ -22,7 +22,7 @@ resource "aws_key_pair" "ubuntu-ssh" {
   }
 }
 
-#? Creación de Instancia EC2
+#? Creación de Instancia EC2 
 resource "aws_instance" "ubuntu" {
   ami               = var.imagenEc2
   instance_type     = "t2.micro"
