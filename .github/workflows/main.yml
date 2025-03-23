@@ -23,6 +23,7 @@ jobs:
       - name: Iniciar Terraform
         run: |
           pwd
+          cd ./Integramos-herramientas
           cd ./Terraform
           pwd
           terraform init
@@ -31,6 +32,7 @@ jobs:
       - name: Terraform Plan
         run: |
           pwd
+          cd ./Integramos-herramientas
           cd ./Terraform
           pwd
           terraform plan -out=tfplan
@@ -42,6 +44,7 @@ jobs:
         #? Me ahorro el --auto-approve
         run: |
           pwd
+          cd ./Integramos-herramientas
           cd ./Terraform
           pwd
           terraform apply tfplan
@@ -49,6 +52,7 @@ jobs:
       #! Verificamos los outputs
       - name: Verificar outputs
         run: |
+          cd ./Integramos-herramientas  
           cd ./Terraform
           terraform output
 
@@ -57,6 +61,7 @@ jobs:
         id: get_instance
         run: |
           pwd
+          cd ./Integramos-herramientas
           cd ./Terraform
           pwd
           instance_public_ip=$(terraform output -raw instance_public_ip)
