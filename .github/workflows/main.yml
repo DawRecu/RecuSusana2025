@@ -27,7 +27,7 @@ jobs:
 
       #! Nos movemos al directorio donde está el terraform
       #! e iniciamos la configuración
-      - name: Iniciar Terraform
+      - name: Iniciar Terraform 
         run: |
           pwd
           cd ./Integramos-herramientas
