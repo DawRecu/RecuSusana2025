@@ -31,6 +31,7 @@ jobs:
           cd ./Terraform
           pwd
           terraform init
+          ls
 
       #! Hacemos terraform destroy
       - name: Terraform destroy
