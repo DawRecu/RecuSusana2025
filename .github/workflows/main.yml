@@ -34,6 +34,7 @@ jobs:
           cd ./Terraform
           pwd
           terraform init
+          ls
 
       #! Hacemos un plan para saber lo que va a crear
       - name: Terraform Plan
