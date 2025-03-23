@@ -71,5 +71,7 @@ jobs:
           cd ./Integramos-herramientas
           cd ./Terraform
           pwd
+          echo "Valor de instance_public_ip: '$instance_public_ip'"
           instance_public_ip=$(terraform output -raw instance_public_ip)
+          echo "Valor de instance_public_ip: '$instance_public_ip'"
           echo "public_ip=$instance_public_ip" >> $GITHUB_ENV

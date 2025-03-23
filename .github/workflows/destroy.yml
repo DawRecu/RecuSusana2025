@@ -16,6 +16,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4.2.2
 
+      #! Nos aseguramos de que terraform esté instalado
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2.0.3
+        with:
+          terraform_version: latest
+
       #! Nos movemos al directorio donde está el terraform
       #! e iniciamos la configuración
       - name: Iniciar Terraform
