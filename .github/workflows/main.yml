@@ -3,7 +3,7 @@ name: Despliegue continuo de 'Integramos Herramientas'
 on:
   push:
     branches:
-      - main
+      - tests
 
 jobs:
   despliegue:
