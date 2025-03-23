@@ -21,10 +21,16 @@ jobs:
       - name: Iniciar Terraform
         run: |
           pwd
+          cd ./Integramos-herramientas
           cd ./Terraform
           pwd
           terraform init
 
       #! Hacemos terraform destroy
       - name: Terraform destroy
-        run: terraform destroy --auto-approve
+        run: |
+          pwd
+          cd ./Integramos-herramientas
+          cd ./Terraform
+          pwd
+          terraform destroy --auto-approve
