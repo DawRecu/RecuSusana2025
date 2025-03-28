@@ -62,4 +62,3 @@ jobs:
           cd ./Integramos-herramientas  
           cd ./Terraform
           terraform output
-      #! Falta subir el archivo a un bucket s3
