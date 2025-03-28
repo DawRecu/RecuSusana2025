@@ -15,7 +15,7 @@ jobs:
     steps:
       #! Clonamos el repositorio en la máquina ubuntu
       - name: Checkout repository
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v4.2.2 
 
       #! Nos aseguramos de que terraform esté instalado
       - name: Setup Terraform
