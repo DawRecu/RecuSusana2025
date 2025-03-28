@@ -1,7 +1,7 @@
 name: Destroy Infraestructura de AWS con Terraform
 
 on:
-  workflow_dispatch:  # Esto permite que se ejecute manualmente desde la interfaz de GitHub
+  workflow_dispatch:
 
 jobs:
   destroy:
@@ -27,6 +27,11 @@ jobs:
       - name: Download terraform.tfstate from S3
         run: |
           aws s3 cp s3://${{ env.BUCKET_NAME }}/terraform.tfstate terraform.tfstate
+
+      #! Inicializamos Terraform para asegurarnos de que se descarguen los proveedores y se configure el backend
+      - name: Initialize Terraform
+        run: |
+          terraform init
 
       #! Ejecutamos terraform destroy para destruir la infraestructura
       - name: Terraform Destroy
