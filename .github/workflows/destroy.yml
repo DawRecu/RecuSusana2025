@@ -1,30 +1,45 @@
-name: Terraform Destroy
+name: Destroy Infraestructura de AWS con Terraform
 
 on:
   workflow_dispatch:
 
 jobs:
-  despliegue:
+  destroy:
     runs-on: ubuntu-latest
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+      BUCKET_NAME: "ascbackendstate"
 
     steps:
       #! Clonamos el repositorio en la máquina ubuntu
       - name: Checkout repository
         uses: actions/checkout@v4.2.2
 
-      #! Nos movemos al directorio donde está el terraform
-      #! e iniciamos la configuración
-      - name: Iniciar Terraform
+      #! Nos aseguramos de que terraform esté instalado
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2.0.3
+        with:
+          terraform_version: latest 
+
+      #! Descargamos el archivo terraform.tfstate desde el bucket S3
+      - name: Download terraform.tfstate from S3
         run: |
-          pwd
+          cd ./Integramos-herramientas
           cd ./Terraform
-          pwd
+          aws s3 cp s3://${{ env.BUCKET_NAME }}/terraform.tfstate terraform.tfstate
+
+      #! Inicializamos Terraform para asegurarnos de que se descarguen los proveedores y se configure el backend
+      - name: Initialize Terraform
+        run: |
+          cd ./Integramos-herramientas
+          cd ./Terraform
           terraform init
 
-      #! Hacemos terraform destroy
-      - name: Terraform destroy
-        run: terraform destroy --auto-approve
+      #! Ejecutamos terraform destroy para destruir la infraestructura
+      - name: Terraform Destroy
+        run: |
+          cd ./Integramos-herramientas
+          cd ./Terraform
+          terraform destroy -auto-approve
