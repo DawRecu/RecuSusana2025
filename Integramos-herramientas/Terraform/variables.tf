@@ -13,3 +13,9 @@ variable "name" {
   type = string
   default     = "MyResource"
 }
+
+variable "nameS3" {
+  description = "El nombre que se le pondra a los tag de los recursos"
+  type = string
+  default     = "MyName"
+}
