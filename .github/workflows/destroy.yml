@@ -21,7 +21,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2.0.3
         with:
-          terraform_version: latest
+          terraform_version: latest 
 
       #! Descargamos el archivo terraform.tfstate desde el bucket S3
       - name: Download terraform.tfstate from S3
