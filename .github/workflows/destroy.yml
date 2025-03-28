@@ -1,15 +1,16 @@
-name: Destrucción de infraestructura 'Integramos Herramientas'
+name: Destroy Infraestructura de AWS con Terraform
 
 on:
-  workflow_dispatch: 
+  workflow_dispatch:  # Esto permite que se ejecute manualmente desde la interfaz de GitHub
 
 jobs:
-  destruir:
+  destroy:
     runs-on: ubuntu-latest
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+      BUCKET_NAME: "ascbackendstate"
 
     steps:
       #! Clonamos el repositorio en la máquina ubuntu
@@ -22,31 +23,12 @@ jobs:
         with:
           terraform_version: latest
 
-      #! Nos movemos al directorio donde está el terraform
-      - name: Iniciar Terraform
+      #! Descargamos el archivo terraform.tfstate desde el bucket S3
+      - name: Download terraform.tfstate from S3
         run: |
-          pwd
-          cd ./Integramos-herramientas
-          cd ./Terraform
-          pwd
-          terraform init
-          ls
+          aws s3 cp s3://${{ env.BUCKET_NAME }}/terraform.tfstate terraform.tfstate
 
-      #! Hacemos un plan para ver lo que va a destruir
-      - name: Terraform Plan para destruir
+      #! Ejecutamos terraform destroy para destruir la infraestructura
+      - name: Terraform Destroy
         run: |
-          pwd
-          cd ./Integramos-herramientas
-          cd ./Terraform
-          pwd
-          terraform plan -destroy -out=tfplan_destroy
-
-      #! Terraform destroy para destruir la IaC
-      - name: Destroy Terraform Infrastructure
-        id: destroy_terraform
-        run: |
-          pwd
-          cd ./Integramos-herramientas
-          cd ./Terraform
-          pwd
-          terraform apply -destroy -auto-approve tfplan_destroy
+          terraform destroy -auto-approve
