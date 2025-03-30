@@ -5,7 +5,7 @@ resource "aws_security_group" "ubuntu-jenkins" {
   vpc_id      = aws_vpc.mi_vpc.id
 
   ingress {
-    description = "HTTP"
+    description = "Jenkins"
     from_port   = 8080
     to_port     = 8080
     protocol    = "tcp"
