@@ -26,20 +26,17 @@ jobs:
       #! Descargamos el archivo terraform.tfstate desde el bucket S3
       - name: Download terraform.tfstate from S3
         run: |
-          cd ./Integramos-herramientas
-          cd ./Terraform
+          cd ./Paris-IA/Terraform
           aws s3 cp s3://${{ env.BUCKET_NAME }}/terraform.tfstate terraform.tfstate
 
       #! Inicializamos Terraform para asegurarnos de que se descarguen los proveedores y se configure el backend
       - name: Initialize Terraform
         run: |
-          cd ./Integramos-herramientas
-          cd ./Terraform
+          cd ./Paris-IA/Terraform
           terraform init
 
       #! Ejecutamos terraform destroy para destruir la infraestructura
       - name: Terraform Destroy
         run: |
-          cd ./Integramos-herramientas
-          cd ./Terraform
+          cd ./Paris-IA/Terraform
           terraform destroy -auto-approve
