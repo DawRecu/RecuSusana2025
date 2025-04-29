@@ -32,14 +32,14 @@ jobs:
       #! e iniciamos la configuración
       - name: Iniciar Terraform 
         run: |
-          pwd
           cd ./Paris-IA/Terraform
-          ls
+          pwd
           terraform init
 
       #! Hacemos un plan para saber lo que va a crear
       - name: Terraform Plan
         run: |
+          cd ./Paris-IA/Terraform
           pwd
           terraform plan -out=tfplan
 
@@ -49,17 +49,18 @@ jobs:
         #? Aquí le indico el archivo que creé con el terraform plan.
         #? Me ahorro el --auto-approve
         run: |
+          cd ./Paris-IA/Terraform
           pwd
           terraform apply tfplan
 
       #! Subimos los archivos de la web mediante AWS CLI
       - name: Subida de archivos de la Web
         run: |
+           cd ./Paris-IA/Terraform
            aws s3 sync ../Website/ s3://ascbucketparisia/
 
       #! Verificamos los outputs
       - name: Verificar outputs
         run: |
-          cd ./Integramos-herramientas  
-          cd ./Terraform
+          cd ./Paris-IA/Terraform
           terraform output
