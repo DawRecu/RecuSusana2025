@@ -101,4 +101,4 @@ resource "aws_s3_bucket_acl" "bucket-acl" {
 # Output para la URL del bucket S3
 output "s3_bucket_website_url" {
   value = "http://${aws_s3_bucket.ParisIA.bucket}.s3-website-us-east-1.amazonaws.com"
-}
+} 
