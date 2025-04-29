@@ -8,8 +8,3 @@ variable "bucket_name" {
   description = "Nombre del bucket S3"
   type = string
 }
-
-variable "file_path" {
-	description = "Directorio de archivos a subir"
-	type        = string
-}
