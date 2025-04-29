@@ -13,6 +13,7 @@ mime_types=(
   [".jpg"]="image/jpeg"
   [".jpeg"]="image/jpeg"
   [".png"]="image/png"
+  [".webp"]="image/webp"
 )
 
 # Crear un array para almacenar los archivos y sus tipos MIME
