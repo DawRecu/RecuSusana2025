@@ -1,4 +1,4 @@
-name: Despliegue continuo de 'Integramos Herramientas'
+name: Despliegue continuo
 
 on:
   push:
