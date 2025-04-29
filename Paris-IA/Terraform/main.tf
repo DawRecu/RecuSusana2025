@@ -83,19 +83,19 @@ resource "aws_s3_bucket_acl" "bucket-acl" {
 }
 
 #? Leer el archivo JSON generado por el script
-data "local_file" "file_list" {
-  filename = "files_list.json"
-}
+# data "local_file" "file_list" {
+#   filename = "files_list.json"
+# }
 
 #? Añado los archivos al bucket
-resource "aws_s3_object" "upload_files" {
-  for_each = { for idx, file in jsondecode(data.local_file.file_list.content) : idx => file }
-
-  bucket       = aws_s3_bucket.ParisIA.bucket
-  key          = each.value.key
-  source       = each.value.source
-  content_type = each.value.content_type
-}
+# resource "aws_s3_object" "upload_files" {
+#   for_each = { for idx, file in jsondecode(data.local_file.file_list.content) : idx => file }
+# 
+#   bucket       = aws_s3_bucket.ParisIA.bucket
+#   key          = each.value.key
+#   source       = each.value.source
+#   content_type = each.value.content_type
+# }
 
 
 # Output para la URL del bucket S3
