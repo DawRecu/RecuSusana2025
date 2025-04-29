@@ -23,24 +23,23 @@ jobs:
         uses: hashicorp/setup-terraform@v2.0.3
         with:
           terraform_version: latest
+      
+      #! Instalamos AWS CLI
+      - name: Setup AWS SAM CLI
+        uses: aws-actions/setup-sam@v2
 
       #! Nos movemos al directorio donde está el terraform
       #! e iniciamos la configuración
       - name: Iniciar Terraform 
         run: |
           pwd
-          cd ./Integramos-herramientas
-          cd ./Terraform
-          pwd
-          terraform init
+          cd ./Paris-IA/Terraform
           ls
+          terraform init
 
       #! Hacemos un plan para saber lo que va a crear
       - name: Terraform Plan
         run: |
-          pwd
-          cd ./Integramos-herramientas
-          cd ./Terraform
           pwd
           terraform plan -out=tfplan
 
@@ -51,10 +50,12 @@ jobs:
         #? Me ahorro el --auto-approve
         run: |
           pwd
-          cd ./Integramos-herramientas
-          cd ./Terraform
-          pwd
           terraform apply tfplan
+
+      #! Subimos los archivos de la web mediante AWS CLI
+      - name: Subida de archivos de la Web
+        run: |
+           aws s3 sync ../Website/ s3://ascbucketparisia/
 
       #! Verificamos los outputs
       - name: Verificar outputs
